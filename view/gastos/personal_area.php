@@ -47,7 +47,6 @@ if ( !isset($_SESSION["currentuser"]) ){
 
     <?php
     include('header.php')
-    ?>
 		<p class="texto">Esto es una pequeña explicacion de lo que deberia
 		pasar, ademas aqui tienes una tabla completamente copiada:</p>
         <p class="texto">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
