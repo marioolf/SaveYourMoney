@@ -11,13 +11,6 @@ footer{
 	font-family: "Oxanium", sans-serif;
 }
 
-.menuOpc{
-	overflow: hidden;
-	background-color: #171717;
-	font-family: "Oxanium", sans-serif;
-	display: flex;
-	height: 100px;
-}
 
 .opciones{
 	background-color: #E37714;

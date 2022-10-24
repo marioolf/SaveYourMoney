@@ -48,17 +48,6 @@ if ( !isset($_SESSION["currentuser"]) ){
     <?php
     include('header.php')
     ?>
-
-    <header>
-			<div class="menuOpc">
-				<!-- <a href="#" class="imagen"><img src="images/oie_transparent.png"></a> -->
-				<img src="images/oie_transparent.png">
-				<button class="opciones">Opcion1</button>
-				<button class="opciones">Opcion2</button>
-				<button class="opciones">Opcion3</button>
-			</div>
-		</header> 
-	  
 		<p class="texto">Esto es una pequeña explicacion de lo que deberia
 		pasar, ademas aqui tienes una tabla completamente copiada:</p>
         <p class="texto">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
