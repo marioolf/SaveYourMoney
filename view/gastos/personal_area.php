@@ -45,11 +45,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 	</head>
 	<body data-lang="es">
 
-    <?php
-    include('header.php')
-    ?>
-
-    <header>
+		<header>
 			<div class="menuOpc">
 				<!-- <a href="#" class="imagen"><img src="images/oie_transparent.png"></a> -->
 				<img src="images/oie_transparent.png">

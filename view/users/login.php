@@ -46,7 +46,7 @@ if (isset($_POST["username"])){
 	<body data-lang="es">
 		<header>
 			<div>
-				<img class="imagen" src="images/oie_transparent2.png">
+				<img class="imagen" src="images/oie_transparent.png">
 			</div>
 		</header> 
 	  
