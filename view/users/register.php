@@ -66,52 +66,52 @@ if (isset($_POST["username"])){
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="../../css/register.css" media="screen">
+		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>register</title>
 
 	</head>
-	<body data-lang="es">
+	<body class="bodyreg" data-lang="es">
 		<header>
 			<div>
-				<img class="imagen" src="../../images/oie_transparent2.png">
+				<img class="imagenreg" src="../../images/oie_transparent2.png">
 			</div>
 		</header> 
 	  
-		<p class="texto">SaveYourMoney es una aplicacón que te permitirá hacer un seguimiento de todos tus gastos,
+		<p class="textoreg">SaveYourMoney es una aplicacón que te permitirá hacer un seguimiento de todos tus gastos,
 				¡Olvídate de acabar el mes a 0!</p>
-	  
-			
-		<div class="container">
 
-        <?php if ($registerOK): ?>
-        <p>Bienvenido a la aplicación. Por favor <a href="login.php">logueate</a></p>
+      <?php if ($registerOK): ?>
+      <p>Bienvenido a la aplicación. Por favor <a href="login.php">logueate</a></p>
+
+      <?php else: 
+
+      ?> 
+        <div class="container">
+              <form action="register.php" method="POST">
+                  <label class="labelreg">Usuario : </label>   
+                  <input class="inputreg" type="text" name="username" 
+                  value="<?= isset($_POST["username"])?$_POST["username"]:"" ?>">
+          <?= isset($errors["username"])?$errors["username"]:"" ?><br>
+                  <label class="labelreg">Contraseña : </label>  
+                  <input class="inputreg" type="password" name="passwd" 
+                  value="<?= isset($_POST["passwd"])?$_POST["passwd"]:"" ?>">
+          <?= isset($errors["passwd"])?$errors["passwd"]:"" ?><br>
+
+                  <button class="buttonreg" type="submit">Register </button>
+              </form>
+         </div>
+
+      <?php endif ?>
+
+
+		
     
-        <?php else: 
-
-        ?> 
-                <form action="register.php" method="POST">
-                    <label>Usuario : </label>   
-                    <input type="text" name="username" 
-                    value="<?= isset($_POST["username"])?$_POST["username"]:"" ?>">
-            <?= isset($errors["username"])?$errors["username"]:"" ?><br>
-                    <label>Contraseña : </label>  
-                    <input type="password" name="passwd" 
-                    value="<?= isset($_POST["passwd"])?$_POST["passwd"]:"" ?>">
-            <?= isset($errors["passwd"])?$errors["passwd"]:"" ?><br>
-
-                    <button type="submit">Register </button>
-                </form>
-        <?php endif ?>
-
-			
-		</div>
     
-    
-		<footer>
+		<footer class="footerreg">
 			<div>
-				<p class='texto'>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
+				<p class='textoreg'>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
 			</div>
 		</footer>
 	</body>

@@ -1,6 +1,6 @@
 <html lang="es">
 
-  <link rel="stylesheet" href="../../css/header.css" media="screen">
+  <link rel="stylesheet" href="../../css/style.css" media="screen">
 
   <div class="menu">
     <img class="imagen" src="../../images/oie_transparent2.png">

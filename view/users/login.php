@@ -37,16 +37,16 @@ if (isset($_POST["username"])){
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="../../css/login.css" media="screen">
+		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>login</title>
 
 	</head>
-	<body data-lang="es">
+	<body class="bodylog" data-lang="es">
 		<header>
 			<div>
-				<img class="imagen" src="../../images/oie_transparent2.png">
+				<img class="imagenlog" src="../../images/oie_transparent2.png">
 			</div>
 		</header> 
 	  
@@ -57,14 +57,14 @@ if (isset($_POST["username"])){
 		<div class="container">
 
 			<form action="login.php" method="POST">
-				<label>Usuario : </label>   
-				<input type="text" placeholder="Introduce tu usuario" name="username">
-				<label>Contraseña : </label>  
-				<input type="password" placeholder="Introduce tu contraseña" name="passwd">
-				<input type="checkbox" placeholder="Recuerdame" checked="checked">
+				<label class="labellog">Usuario : </label>   
+				<input class="inputlog" type="text" placeholder="Introduce tu usuario" name="username">
+				<label class="labellog">Contraseña : </label>  
+				<input class="inputlog" type="password" placeholder="Introduce tu contraseña" name="passwd">
+				<input class="inputlog" type="checkbox" placeholder="Recuerdame" checked="checked">
 				<a class="color">Recuerdame</a>
 
-				<button type="submit">Login </button>
+				<button class="buttonlog" type="submit">Login </button>
 			</form>
 
 			<a href="#" class="fpass"> ¿Olvidaste tu contraseña? </a>  
@@ -76,7 +76,7 @@ if (isset($_POST["username"])){
 
     
     
-		<footer>
+		<footer class="footerlog">
 			<div>
 				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
 			</div>
