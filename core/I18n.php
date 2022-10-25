@@ -1,21 +1,5 @@
 <?php
-//file: /core/I18n.php
 
-/**
-* Class I18n
-*
-* This class implements a helper class for Internationalization (I18n).
-* Basically this Singleton class manages a set of translation files
-* (located in /view/messages/language_[lang].php) and provides a
-* translation function: i18n(string)
-* You can also change the current language with the setLanguage function.
-* The last selected language is saved in the user session so it is the
-* language retrieved each time this class is instantiated.
-* In addition this file creates a global function, i18n(), as a shortcut
-* to the function.
-*
-* @author lipido <lipido@gmail.com>
-*/
 class I18n {
 
 	private $messages;

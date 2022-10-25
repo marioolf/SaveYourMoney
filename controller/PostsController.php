@@ -1,7 +1,7 @@
 <?php
 //file: controller/PostController.php
 
-require_once(__DIR__."/../model/Comment.php");
+
 require_once(__DIR__."/../model/Post.php");
 require_once(__DIR__."/../model/PostMapper.php");
 require_once(__DIR__."/../model/User.php");
