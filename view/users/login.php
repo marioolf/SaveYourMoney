@@ -68,7 +68,7 @@ if (isset($_POST["username"])){
 			</form>
 
 			<a href="#" class="fpass"> ¿Olvidaste tu contraseña? </a>  
-			<p class="texto"><a href="register.php">Registrate!</a></p>
+			<p class="texto"><a href="./register.php">Registrate!</a></p>
 			
 		</div>
     

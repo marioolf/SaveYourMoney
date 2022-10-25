@@ -2,7 +2,7 @@
 
 // file: posts.php
 
-require_once("db_connection.php");
+require_once("../../core/db_connection.php");
 
 session_start();
 

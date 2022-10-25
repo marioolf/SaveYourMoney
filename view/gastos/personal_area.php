@@ -45,20 +45,23 @@ if ( !isset($_SESSION["currentuser"]) ){
 	</head>
 	<body data-lang="es">
 
-		<header>
-			<div class="menuOpc">
-				<!-- <a href="#" class="imagen"><img src="images/oie_transparent.png"></a> -->
-				<img src="images/oie_transparent.png">
-				<button class="opciones">Opcion1</button>
-				<button class="opciones">Opcion2</button>
-				<button class="opciones">Opcion3</button>
+		<?php
+		include('../layout/header.php');
+		?>
+			<p class="texto">Esto es una pequeña explicacion de lo que deberia
+			pasar, ademas aqui tienes una tabla completamente copiada:</p>
+			<p class="texto">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
+			
+			<div class="chart">
+				<figure class="highcharts-figure">
+					<div id="container"></div>
+						<p class="highcharts-description">
+							Gastos en los últimos doce meses, separado por tipo de gasto.
+						</p>
+				</figure>
 			</div>
-		</header> 
-	  
-		<p class="texto">Esto es una pequeña explicacion de lo que deberia
-		pasar, ademas aqui tienes una tabla completamente copiada:</p>
-        <p class="texto">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
 		
+<<<<<<< HEAD
 		<div class="chart">
 			<figure class="highcharts-figure">
 				<div id="container"></div>
@@ -75,6 +78,15 @@ if ( !isset($_SESSION["currentuser"]) ){
 				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
 			</div>
 		</footer>
+=======
+			<p class="texto"><a href="logout.php">Cerrar la sesión</a></p>
+		
+			<footer>
+				<div>
+					<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
+				</div>
+			</footer>
+>>>>>>> 21f4ec9a110b69cf3e1c2733d2936ff75a749116
 	</body>
 </html>
 
