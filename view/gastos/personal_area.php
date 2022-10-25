@@ -6,7 +6,7 @@ session_start();
 // security check ...
 if ( !isset($_SESSION["currentuser"]) ){
   echo "Not in session, this is a restricted area<br>";
-  echo "<a href='login.php'>Go to login.php</a>";
+  echo "<a href='../users/login.php'>Go to login.php</a>";
   die();
 }
 
@@ -61,6 +61,24 @@ if ( !isset($_SESSION["currentuser"]) ){
 				</figure>
 			</div>
 		
+<<<<<<< HEAD
+		<div class="chart">
+			<figure class="highcharts-figure">
+				<div id="container"></div>
+					<p class="highcharts-description">
+						Gastos en los últimos doce meses, separado por tipo de gasto.
+					</p>
+			</figure>
+		</div>
+	  
+        <p class="texto"><a href="../users/logout.php">Cerrar la sesión</a></p>
+    
+		<footer>
+			<div>
+				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
+			</div>
+		</footer>
+=======
 			<p class="texto"><a href="logout.php">Cerrar la sesión</a></p>
 		
 			<footer>
@@ -68,6 +86,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 					<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
 				</div>
 			</footer>
+>>>>>>> 21f4ec9a110b69cf3e1c2733d2936ff75a749116
 	</body>
 </html>
 
