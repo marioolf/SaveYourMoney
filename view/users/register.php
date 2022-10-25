@@ -1,7 +1,7 @@
 <?php
 //file: register.php
 
-require_once("db_connection.php");
+require_once("../../core/db_connection.php");
 session_start();
 
 $errors = array(); // validation errors
@@ -66,7 +66,7 @@ if (isset($_POST["username"])){
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="register.css" media="screen">
+		<link rel="stylesheet" href="../../css/register.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>register</title>
@@ -75,7 +75,7 @@ if (isset($_POST["username"])){
 	<body data-lang="es">
 		<header>
 			<div>
-				<img class="imagen" src="images/oie_transparent.png">
+				<img class="imagen" src="../../images/oie_transparent2.png">
 			</div>
 		</header> 
 	  

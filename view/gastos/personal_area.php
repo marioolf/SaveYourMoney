@@ -6,7 +6,7 @@ session_start();
 // security check ...
 if ( !isset($_SESSION["currentuser"]) ){
   echo "Not in session, this is a restricted area<br>";
-  echo "<a href='login.php'>Go to login.php</a>";
+  echo "<a href='../users/login.php'>Go to login.php</a>";
   die();
 }
 
@@ -23,7 +23,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="personal_area.css" media="screen">
+		<link rel="stylesheet" href="../../css/personal_area.css" media="screen">
 		
 		<!-- highcharts stuff -->
 		<script src="https://code.highcharts.com/highcharts.js"></script>
@@ -68,7 +68,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 			</figure>
 		</div>
 	  
-        <p class="texto"><a href="logout.php">Cerrar la sesión</a></p>
+        <p class="texto"><a href="../users/logout.php">Cerrar la sesión</a></p>
     
 		<footer>
 			<div>

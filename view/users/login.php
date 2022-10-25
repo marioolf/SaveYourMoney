@@ -1,7 +1,7 @@
 <?php
 //file: login.php
 
-require_once("db_connection.php");
+require_once("../../core/db_connection.php");
 session_start();
 
 if (isset($_POST["username"])){
@@ -15,7 +15,7 @@ if (isset($_POST["username"])){
       $_SESSION["currentuser"] = $_POST["username"];
       
       // send user to the restricted area (HTTP 302 code)
-      header("Location: personal_area.php");
+      header("Location: ../gastos/personal_area.php");
       die();
     }else{
       echo "Username is not valid<br>";
@@ -37,7 +37,7 @@ if (isset($_POST["username"])){
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="login.css" media="screen">
+		<link rel="stylesheet" href="../../css/login.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>login</title>
@@ -46,7 +46,7 @@ if (isset($_POST["username"])){
 	<body data-lang="es">
 		<header>
 			<div>
-				<img class="imagen" src="images/oie_transparent.png">
+				<img class="imagen" src="../../images/oie_transparent2.png">
 			</div>
 		</header> 
 	  
