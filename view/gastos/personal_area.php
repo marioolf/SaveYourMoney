@@ -23,7 +23,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="personal_area.css" media="screen">
+		<link rel="stylesheet" href="../../css/personal_area.css" media="screen">
 		
 		<!-- highcharts stuff -->
 		<script src="https://code.highcharts.com/highcharts.js"></script>
@@ -45,28 +45,29 @@ if ( !isset($_SESSION["currentuser"]) ){
 	</head>
 	<body data-lang="es">
 
-    <?php
-    include('header.php')
-		<p class="texto">Esto es una pequeña explicacion de lo que deberia
-		pasar, ademas aqui tienes una tabla completamente copiada:</p>
-        <p class="texto">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
-		
-		<div class="chart">
-			<figure class="highcharts-figure">
-				<div id="container"></div>
-					<p class="highcharts-description">
-						Gastos en los últimos doce meses, separado por tipo de gasto.
-					</p>
-			</figure>
-		</div>
-	  
-        <p class="texto"><a href="logout.php">Cerrar la sesión</a></p>
-    
-		<footer>
-			<div>
-				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
+		<?php
+		include('../layout/header.php');
+		?>
+			<p class="texto">Esto es una pequeña explicacion de lo que deberia
+			pasar, ademas aqui tienes una tabla completamente copiada:</p>
+			<p class="texto">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
+			
+			<div class="chart">
+				<figure class="highcharts-figure">
+					<div id="container"></div>
+						<p class="highcharts-description">
+							Gastos en los últimos doce meses, separado por tipo de gasto.
+						</p>
+				</figure>
 			</div>
-		</footer>
+		
+			<p class="texto"><a href="logout.php">Cerrar la sesión</a></p>
+		
+			<footer>
+				<div>
+					<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
+				</div>
+			</footer>
 	</body>
 </html>
 
