@@ -1,18 +1,26 @@
 <?php
-// file: db_connection.php
+// file: /core/PDOConnection.php
 
-$dbhost = "127.0.0.1";
-$dbname = "sym";
-$dbuser = "root";
-$dbpass = "";
+class PDOConnection {
+	private static $dbhost = "127.0.0.1";
+	private static $dbname = "sym";
+	private static $dbuser = "root";
+	private static $dbpass = "";
+	private static $db_singleton = null;
 
-$db = new PDO(
-	"mysql:host=$dbhost;dbname=$dbname;charset=utf8", // connection string
-	$dbuser, 
-	$dbpass, 
-	array( // options
-	  PDO::ATTR_EMULATE_PREPARES => false,
-	  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-	)
-);
+	public static function getInstance() {
+		if (self::$db_singleton == null) {
+			self::$db_singleton = new PDO(
+			"mysql:host=".self::$dbhost.";dbname=".self::$dbname.";charset=utf8", // connection string
+			self::$dbuser,
+			self::$dbpass,
+			array( // options
+				PDO::ATTR_EMULATE_PREPARES => false,
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+			)
+		);
+	}
+	return self::$db_singleton;
+}
+}
 ?>
