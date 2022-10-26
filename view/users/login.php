@@ -1,7 +1,12 @@
 <?php
 //file: login.php
 
+require_once './../../core/I18n.php';
+require_once './../../core/ViewManager.php';
 require_once("../../core/db_connection.php");
+
+$view = ViewManager::getInstance();
+
 session_start();
 
 if (isset($_POST["username"])){
@@ -71,15 +76,18 @@ if (isset($_POST["username"])){
 			<p class="texto"><a href="./register.php">Registrate!</a></p>
 			
 		</div>
-    
-    
 
-    
-    
+		
 		<footer class="footerlog">
 			<div>
 				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
 			</div>
+
+
+			<?php
+				include(__DIR__."./../layout/language_select_element.php");
+			?>
+		
 		</footer>
 	</body>
 </html>

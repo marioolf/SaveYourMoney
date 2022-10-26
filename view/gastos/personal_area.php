@@ -67,6 +67,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 			<div>
 				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
 			</div>
+			
 		</footer>
 	</body>
 </html>
