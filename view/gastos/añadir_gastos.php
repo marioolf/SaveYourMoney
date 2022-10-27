@@ -53,33 +53,55 @@ if (isset($_POST["submit"])){
 ?>
 
 <html>
-  <body><?php include("../layout/header.php"); ?>
-    <h1>Crear gasto </h1>
-    <?php if ($gastoOK): ?>
-      Gasto añadido de forma correcta. Vuelva a  <a href="gastos.php">GASTOS</a>    
-    <?php else: ?>      
+<head>
+		<meta charset="UTF-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="../../css/style.css" media="screen">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
+		<title>anadir gasto</title>
+
+	</head>
+  <body class="bodygastos" data-lang="es">
+    <?php include("../layout/header.php"); ?>
+    <div class="container">
+      <h1 class="texto">Crear gasto </h1>
+      <?php if ($gastoOK): ?>
+        <p class="texto">Gasto añadido de forma correcta. Vuelva a  <a href="gastos.php">GASTOS</a></p>  
+      <?php else: ?>      
+        
+        <form action="añadir_gastos.php" method="POST">
+
+          <label class="labellog">Nombre:</label><br>
+          <input class="inputgasto" type="text" name="nombre" 
+              value="<?= isset($_POST["nombre"])?$_POST["nombre"]:"" ?>">
+          <?= isset($errors["nombre"])?$errors["nombre"]:"" ?><br>
+
+          <label class="labellog">Importe:</label><br>
+          <input class="inputgasto" type="float" name="importe" 
+              value="<?= isset($_POST["importe"])?$_POST["importe"]:"" ?>">
+          <?= isset($errors["importe"])?$errors["importe"]:"" ?><br>
+
+          <label class="labellog">Tipo:</label><br>
+          <input class="inputgasto" type="text" name="tipo" 
+              value="<?= isset($_POST["tipo"])?$_POST["tipo"]:"" ?>">
+          <?= isset($errors["tipo"])?$errors["tipo"]:"" ?><br>
+          
+          <label class="labellog">Descripcion:</label><br>
+          <textarea class="textarea" name="descr" rows="4" cols="50"><?= isset($_POST["descr"])?$_POST["descr"]:"" ?></textarea>
+          <?= isset($errors["descr"])?$errors["descr"]:"" ?><br>
+
+          <input class="inputbtn" type="submit" name="submit" value="Submit">
+        </form>
       
-      <form action="añadir_gastos.php" method="POST">
-
-	    Nombre: <input type="text" name="nombre" 
-			     value="<?= isset($_POST["nombre"])?$_POST["nombre"]:"" ?>">
-	    <?= isset($errors["nombre"])?$errors["nombre"]:"" ?><br>
-
-      Importe: <input type="float" name="importe" 
-			     value="<?= isset($_POST["importe"])?$_POST["importe"]:"" ?>">
-	    <?= isset($errors["importe"])?$errors["importe"]:"" ?><br>
-
-      Tipo: <input type="text" name="tipo" 
-			     value="<?= isset($_POST["tipo"])?$_POST["tipo"]:"" ?>">
-	    <?= isset($errors["tipo"])?$errors["tipo"]:"" ?><br>
-	    
-	    Descripcion: <br>
-	    <textarea name="descr" rows="4" cols="50"><?= isset($_POST["descr"])?$_POST["descr"]:"" ?></textarea>
-	    <?= isset($errors["descr"])?$errors["descr"]:"" ?><br>
-	    
-	    <input type="submit" name="submit" value="submit">
-      </form>
-    
-    <?php endif ?>
+      <?php endif ?>
+    </div>
   </body>
 </html>

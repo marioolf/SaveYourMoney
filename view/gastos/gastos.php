@@ -30,78 +30,103 @@ try {
 ?>
 
 
-<html>
-  <body>
-    <?php include("../layout/header.php"); ?>
-    <h1>Gastos</h1>
-  
-    <table border="1">
-      <tr>
-	<th>Nombre</th><th>Descripcion</th><th>Importe</th><th>Tipo de gasto</th>
-      </tr>
-    
-    <?php foreach ($gastos as $gasto) : ?>
-		<?php if ($gasto["author"] == $currentuser): 
-            //Mostramos solo los gastos del usuario logeado
-        ?>
-            
-	    <tr>	    
-	      <td>
-		    <a href="vista_gastos.php?id=<?= $gasto["id"] ?>"><?= htmlentities($gasto["nombre"]) ?>
-	      </td>
-	      <td>
-		<?= $gasto["descr"] ?>
-	      </td>
-		  <td>
-		<?= $gasto["importe"] ?> €
-	      </td>
-		  <td>
-		<?= $gasto["tipo"] ?>
-	      </td>
-	      <td>&nbsp;
+<html lang="es">
+	<head>
+		<meta charset="UTF-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
 		
-		<?php endif ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-		<?php if (isset($currentuser) && ($gasto["author"] == $currentuser)): ?>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="../../css/style.css" media="screen">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
+		<title>gastos</title>
+
+	</head>
+	<body class="bodygastos" data-lang="es">
+		<?php
+			include('../layout/header.php');
+		?>
+		<div class="container">
+			<h1 class="texto">Gastos</h1>
 		
-            <?php 
-            //Boton Borrar
-		    ?>
-		  <form 		    
-		    method="POST" 
-		    action="eliminar_gastos.php" 
-		    id="eliminar_gastos_<?= $gasto["id"]; ?>"
-		    style="display: inline" 
-		    >
-		  
-		    <input type="hidden" name="id" value="<?= $gasto["id"] ?>">
-		  
-		    <a href="#" 
-		      onclick="
-		      if (confirm('Estas seguro de borrar el gasto?')) {
-			    document.getElementById('eliminar_gastos_<?= $gasto["id"] ?>').submit() }" > Eliminar </a>
-		  
-		  </form>
-		  
-		  &nbsp;
-		  
-		  <?php 
-		  // Boton Editar
-		  ?>		  
-		  <a href="editar_gastos.php?id=<?= $gasto["id"] ?>" > Editar </a>
-		
-		<?php endif; ?>
+			<table class="tablagastos">
+				<tr>
+					<th>Nombre</th>
+					<th>Descripcion</th>
+					<th>Importe</th>
+					<th>Tipo de gasto</th>
+					<th>Acciones</th>
+				</tr>
+			
+			<?php foreach ($gastos as $gasto) : ?>
+				<?php if ($gasto["author"] == $currentuser): 
+					//Mostramos solo los gastos del usuario logeado
+				?>
+					
+				<tr>	    
+				<td>
+					<a href="vista_gastos.php?id=<?= $gasto["id"] ?>"><?= htmlentities($gasto["nombre"]) ?>
+				</td>
+				<td>
+				<?= $gasto["descr"] ?>
+				</td>
+				<td>
+				<?= $gasto["importe"] ?> €
+				</td>
+				<td>
+				<?= $gasto["tipo"] ?>
+				</td>
+				<td>&nbsp;
+				
+				<?php endif ?>
 
-	      </td>
-	    </tr> 
+				<?php if (isset($currentuser) && ($gasto["author"] == $currentuser)): ?>
+				
+					<?php 
+					//Boton Borrar
+					?>
+				<form 		    
+					method="POST" 
+					action="eliminar_gastos.php" 
+					id="eliminar_gastos_<?= $gasto["id"]; ?>"
+					style="display: inline" 
+					>
+				
+					<input type="hidden" name="id" value="<?= $gasto["id"] ?>">
+				
+					<a href="#" 
+					onclick="
+					if (confirm('Estas seguro de borrar el gasto?')) {
+						document.getElementById('eliminar_gastos_<?= $gasto["id"] ?>').submit() }" > Eliminar </a>
+				
+				</form>
+				
+				&nbsp;
+				
+				<?php 
+				// Boton Editar
+				?>		  
+				<a href="editar_gastos.php?id=<?= $gasto["id"] ?>" > Editar </a>
+				
+				<?php endif; ?>
+
+				</td>
+				</tr> 
 
 
-    <?php endforeach; ?>
-    
-    </table>
-    
-    <?php if (isset($currentuser)): ?>
-      <a href="añadir_gastos.php">Create gasto</a>    
-    <?php endif; ?>
-  </body>
+			<?php endforeach; ?>
+			
+			</table>
+			
+			<?php if (isset($currentuser)): ?>
+			<p class="texto"><a href="añadir_gastos.php">Create gasto</a></p>
+			<?php endif; ?>
+		</div>
+	</body>
+	
 </html>
