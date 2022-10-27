@@ -10,6 +10,8 @@ if ( !isset($_SESSION["currentuser"]) ){
   die();
 }
 
+
+
 ?>
 
 <html lang="es">
@@ -25,19 +27,6 @@ if ( !isset($_SESSION["currentuser"]) ){
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		
-		<!-- highcharts stuff -->
-		<script src="https://code.highcharts.com/highcharts.js"></script>
-		<script src="https://code.highcharts.com/modules/series-label.js"></script>
-		<script src="https://code.highcharts.com/modules/exporting.js"></script>
-		<script src="https://code.highcharts.com/modules/export-data.js"></script>
-		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-		<!-- docReady function, which allows us to run javascript when DOM is ready -->
-		<script src="docready.js"></script>
-
-		<!-- my JavaScript code, which adds the charts to 'container' using highcharts -->
-		<script src="charts.js"></script>
-		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>main</title>
@@ -51,18 +40,13 @@ if ( !isset($_SESSION["currentuser"]) ){
 			<p class="textopa">Esto es una pequeña explicacion de lo que deberia
 			pasar, ademas aqui tienes una tabla completamente copiada:</p>
 			<p class="textopa">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
-			
-			<div class="chart">
-				<figure class="highcharts-figure">
-					<div id="container"></div>
-						<p class="highcharts-description">
-							Gastos en los últimos doce meses, separado por tipo de gasto.
-						</p>
-				</figure>
-			</div>
+		
+			<?php
+		include('grafica.php');
+		?>
 
         <p class="textopa"><a href="../users/logout.php">Cerrar la sesión</a></p>
-    
+   
 		<footer class="footerpa">
 			<div>
 				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>

@@ -112,9 +112,12 @@ if (isset($_POST["submit"])){
         <?= isset($errors["importe"])?$errors["importe"]:"" ?><br>
 
         <label class="labellog">Tipo:</label><br>
-        <input class="inputgasto" type="text" name="tipo" 
-          value="<?= isset($_POST["tipo"])?$_POST["tipo"]:$gasto["tipo"] ?>">
-        <?= isset($errors["tipo"])?$errors["tipo"]:"" ?><br>
+          <select name="tipo">
+          <option>Otros</option>
+          <option>Casa</option>
+          <option>Comida</option>
+          <option>Regalos</option>
+          </select><br>
         
         <label class="labellog">Descripcion:</label><br>
         <textarea class="textarea" name="descr" rows="4" cols="50"><?= 
