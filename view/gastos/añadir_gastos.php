@@ -45,8 +45,8 @@ if (isset($_POST["submit"])){
   if ($validationOK) {
     try{
 
-      $stmt = $db->prepare("INSERT INTO gastos(nombre,importe,tipo,descr,author,fecha) values (?,?,?,?,?)");
-      $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"],$_POST["fecha"], $currentuser)); 
+      $stmt = $db->prepare("INSERT INTO gastos(nombre,importe,tipo,descr,author,fecha) values (?,?,?,?,?,?)");
+      $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"],$currentuser,$_POST["fecha"])); 
       $gastoOK = true;
       
     }catch(PDOException $ex){
@@ -94,22 +94,23 @@ if (isset($_POST["submit"])){
           <?= isset($errors["importe"])?$errors["importe"]:"" ?><br>
 
           <label class="labellog">Tipo:</label><br>
-          <select name="tipo">
-          <option>Otros</option>
-          <option>Casa</option>
-          <option>Comida</option>
-          <option>Regalos</option>
-          </select><br>
+          <div class="divtipo">
+            <select class="selecttipo" name="tipo">
+              <option >Otros</option>
+              <option>Casa</option>
+              <option>Comida</option>
+              <option>Regalos</option>
+            </select><br>
+          </div>
           
           <label class="labellog">Descripcion:</label><br>
           <textarea class="textarea" name="descr" rows="4" cols="50"><?= isset($_POST["descr"])?$_POST["descr"]:"" ?></textarea>
           <?= isset($errors["descr"])?$errors["descr"]:"" ?><br>
 
           <label class="labellog">Fecha:</label><br> 
-          <input class="inputfecha" type="date" name="fecha" 
+          <input type="date" value="<?php echo date('Y-m-d'); ?>" name="fecha" 
           value="<?= isset($_POST["fecha"])?$_POST["fecha"]:"" ?>">
           <?= isset($errors["fecha"])?$errors["fecha"]:"" ?><br>
-
 
           <input class="inputbtn" type="submit" name="submit" value="Submit">
         </form>

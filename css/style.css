@@ -252,6 +252,19 @@
 	font-family: "Oxanium", sans-serif;
 }
 
+.divtipo{
+	width: 100%;
+}
+
+.selecttipo{
+	margin: 8px 0;  
+	padding: 12px 20px; 
+}
+
+.selecttipo > option{
+	background-color: #F49237;
+}
+
 
 /*HIGHCHARTS */
 
