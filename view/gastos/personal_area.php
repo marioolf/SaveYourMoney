@@ -40,11 +40,13 @@ if ( !isset($_SESSION["currentuser"]) ){
 			<p class="textopa">Esto es una pequeña explicacion de lo que deberia
 			pasar, ademas aqui tienes una tabla completamente copiada:</p>
 			<p class="textopa">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
-		
-			<?php
+		<div id=graf>
+		<?php
 		include('grafica.php');
 		?>
-
+		</div>
+	
+		</div>
         <p class="textopa"><a href="../users/logout.php">Cerrar la sesión</a></p>
    
 		<footer class="footerpa">

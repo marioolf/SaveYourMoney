@@ -20,7 +20,7 @@ if (isset($_SESSION["currentuser"]) ){
 //Cargamos los gastos
 try {
 
-    $stmt = $db->query("SELECT * FROM gastos");  
+    $stmt = $db->query("SELECT * FROM gastos ORDER BY fecha");  
     $gastos = $stmt->fetchAll(PDO::FETCH_ASSOC);
   
   } catch(PDOException $ex) {
@@ -60,6 +60,7 @@ try {
 					<th>Descripcion</th>
 					<th>Importe</th>
 					<th>Tipo de gasto</th>
+					<th>Fecha</th>
 					<th>Acciones</th>
 				</tr>
 			
@@ -80,6 +81,9 @@ try {
 				</td>
 				<td>
 				<?= $gasto["tipo"] ?>
+				</td>
+				<td>
+				<?= $gasto["fecha"] ?>
 				</td>
 				<td>&nbsp;
 				

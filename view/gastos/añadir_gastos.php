@@ -37,12 +37,16 @@ if (isset($_POST["submit"])){
     $errors["tipo"] = "Tienes que poner un tipo al gasto";
     $validationOK = false;
   }
+  if (strlen(trim($_POST["fecha"])) == null) {
+    $errors["fecha"] = "Tienes que poner una fecha al gasto";
+    $validationOK = false;
+  }
   
   if ($validationOK) {
     try{
 
-      $stmt = $db->prepare("INSERT INTO gastos(nombre,importe,tipo,descr,author) values (?,?,?,?,?)");
-      $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"], $currentuser)); 
+      $stmt = $db->prepare("INSERT INTO gastos(nombre,importe,tipo,descr,author,fecha) values (?,?,?,?,?)");
+      $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"],$_POST["fecha"], $currentuser)); 
       $gastoOK = true;
       
     }catch(PDOException $ex){
@@ -100,6 +104,12 @@ if (isset($_POST["submit"])){
           <label class="labellog">Descripcion:</label><br>
           <textarea class="textarea" name="descr" rows="4" cols="50"><?= isset($_POST["descr"])?$_POST["descr"]:"" ?></textarea>
           <?= isset($errors["descr"])?$errors["descr"]:"" ?><br>
+
+          <label class="labellog">Fecha:</label><br> 
+          <input class="inputfecha" type="date" name="fecha" 
+          value="<?= isset($_POST["fecha"])?$_POST["fecha"]:"" ?>">
+          <?= isset($errors["fecha"])?$errors["fecha"]:"" ?><br>
+
 
           <input class="inputbtn" type="submit" name="submit" value="Submit">
         </form>

@@ -16,7 +16,7 @@ if (isset($_SESSION["currentuser"])) {
 }
 try {
 
-    $stmt = $db->prepare("SELECT * FROM gastos where id=?");
+    $stmt = $db->prepare("SELECT * FROM gastos where id=? ORDER BY fecha");
     $stmt->execute(array($_GET["id"]));
     
     $gasto = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -65,6 +65,9 @@ try {
         <hr>
         <p class="textoleft">Descripcion:</p>
         <p class="texto"><?= htmlentities($gasto["descr"]) ?></p>  
+        <hr>
+        <p class="textoleft">Fecha:</p>
+        <p class="texto"><?= htmlentities($gasto["fecha"]) ?></p>  
       </div>
 
 		<?php endif ?>

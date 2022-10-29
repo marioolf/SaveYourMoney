@@ -58,12 +58,16 @@ if (isset($_POST["submit"])){
       $errors["tipo"] = "Tienes que poner un tipo al gasto";
       $validationOK = false;
     }
+    if (strlen(trim($_POST["fecha"])) == null) {
+      $errors["fecha"] = "Tienes que poner una fecha al gasto";
+      $validationOK = false;
+    }
     
     if ($validationOK) {
       try{
       
-        $stmt = $db->prepare("UPDATE gastos set nombre =?,importe=?,tipo=?,descr=? where id =?");
-        $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"], $gastoid));  
+        $stmt = $db->prepare("UPDATE gastos set nombre =?,importe=?,tipo=?,descr=?,fecha=? where id =?");
+        $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"],$_POST["fecha"], $gastoid));  
       
         $updateOK = true;
         
@@ -127,6 +131,12 @@ if (isset($_POST["submit"])){
         ?></textarea>	    
         <?= isset($errors["descr"])?$errors["descr"]:"" ?><br>
         
+        <label class="labellog">Fecha:</label><br> 
+        <input class="inputfecha" type="date" name="fecha" 
+          value="<?= isset($_POST["fecha"])?$_POST["fecha"]:$gasto["fecha"] ?>">
+        <?= isset($errors["fecha"])?$errors["fecha"]:"" ?><br>
+
+
         <input type="hidden" name="id" value="<?= $gasto["id"] ?>">
         <input class="inputbtn" type="submit" name="submit" value="Submit">
         </form>
