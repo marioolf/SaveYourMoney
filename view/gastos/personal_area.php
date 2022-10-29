@@ -37,6 +37,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 		<?php
 		include('../layout/header.php');
 		?>
+		
 			<p class="textopa">Esto es una pequeña explicacion de lo que deberia
 			pasar, ademas aqui tienes una tabla completamente copiada:</p>
 			<p class="textopa">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
@@ -45,6 +46,7 @@ if ( !isset($_SESSION["currentuser"]) ){
 		include('grafica.php');
 		?>
 		</div>
+		
 	
 		</div>
         <p class="textopa"><a href="../users/logout.php">Cerrar la sesión</a></p>
