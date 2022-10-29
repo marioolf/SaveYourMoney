@@ -116,12 +116,14 @@ if (isset($_POST["submit"])){
         <?= isset($errors["importe"])?$errors["importe"]:"" ?><br>
 
         <label class="labellog">Tipo:</label><br>
-          <select name="tipo">
-          <option>Otros</option>
-          <option>Casa</option>
-          <option>Comida</option>
-          <option>Regalos</option>
-          </select><br>
+        <div class="divtipo">
+            <select class="selecttipo" name="tipo">
+              <option >Otros</option>
+              <option>Casa</option>
+              <option>Comida</option>
+              <option>Regalos</option>
+            </select><br>
+        </div>
         
         <label class="labellog">Descripcion:</label><br>
         <textarea class="textarea" name="descr" rows="4" cols="50"><?= 
