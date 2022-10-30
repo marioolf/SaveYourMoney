@@ -20,7 +20,7 @@ if(!isset($_POST['fecha2'])){
 	$_POST['fecha2']=date("Ymd");
 }
 
-echo date("Ymd",strtotime($_POST['fecha']));
+
 try {
 
     $stmt = $db->prepare("SELECT tipo,SUM(importe) as importe,fecha,author FROM gastos where author=? AND fecha BETWEEN ? AND ? group by tipo");  
@@ -42,8 +42,6 @@ if( isset($_POST['submit'])){
 			
 			$count=$count+1;
 
-		}else{
-			
 		}
 		if($gasto["tipo"] == "Regalos" && isset($_POST['regalos'])){
 			$test[$count]["label"]=$gasto["tipo"];
@@ -51,8 +49,6 @@ if( isset($_POST['submit'])){
 			$test[$count]["y"]=$gasto["importe"];
 			$count=$count+1;
 
-		}else{
-			
 		}
 		if($gasto["tipo"] == "Comida" && isset($_POST['comida'])){
 			$test[$count]["label"]=$gasto["tipo"];
@@ -60,8 +56,6 @@ if( isset($_POST['submit'])){
 			$test[$count]["y"]=$gasto["importe"];
 			$count=$count+1;
 
-		}else{
-			
 		}
 		if($gasto["tipo"] == "Casa" && isset($_POST['casa'])){
 			$test[$count]["label"]=$gasto["tipo"];
@@ -69,11 +63,8 @@ if( isset($_POST['submit'])){
 			$test[$count]["y"]=$gasto["importe"];
 			$count=$count+1;
 		
-		}else{
-			
 		}
-
-		
+	
 	}
 }else{
 	$count=0;
@@ -86,17 +77,7 @@ foreach($gastos as $gasto){
 	$count=$count+1;
 }
 }
-/*
-$count=0;
-foreach($gastos as $gasto){
 
-	$test[$count]["label"]=$gasto["tipo"];
-	
-	$test[$count]["y"]=$gasto["importe"];
-
-	$count=$count+1;
-}
-*/
 ?>
 
 <!DOCTYPE HTML>
