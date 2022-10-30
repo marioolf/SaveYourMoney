@@ -8,28 +8,120 @@
    $currentuser = $_SESSION["currentuser"];
  }
  
- $test=array();
+
  $count =0;
+ if(!isset($_POST['fecha'])){
+	$time = strtotime("-1 year", time());
+	$date = date("Ymd", $time);
+	$_POST['fecha']=$date;
+}
+if(!isset($_POST['fecha2'])){
+	$_POST['fecha2']=date("Ymd");
+}
  
  try {
  
-     $stmt = $db->prepare("SELECT tipo, (SUM(importe)*100)/(SELECT SUM(importe) FROM `gastos` WHERE author=?) as importe FROM gastos where author=? group by tipo;");  
-     $stmt->execute(array($currentuser,$currentuser));
+     $stmt = $db->prepare("SELECT tipo, SUM(importe) as importe , fecha FROM gastos where author=? AND fecha BETWEEN ? AND ? group by tipo;");  
+     $stmt->execute(array($currentuser,date("Ymd",strtotime($_POST['fecha'])),date("Ymd",strtotime($_POST['fecha2']))));
      $gastos = $stmt->fetchAll(PDO::FETCH_ASSOC);
    
  } catch(PDOException $ex) {
      die("exception! ".$ex->getMessage());
  }
-   
+
+
+    $acum=0;
+
+    foreach($gastos as $gasto){
+
+        if($gasto["tipo"] == "Otros" && isset($_POST['otros'])){
+        
+            $acum=$acum+intval($gasto["importe"]);
+        }
+        if($gasto["tipo"] == "Regalos" && isset($_POST['regalos'])){
+            $acum=$acum+intval($gasto["importe"]);
+        }
+        if($gasto["tipo"] == "Comida" && isset($_POST['comida'])){
+            $acum=$acum+intval($gasto["importe"]);
+        }
+        if($gasto["tipo"] == "Casa" && isset($_POST['casa'])){
+            $acum=$acum+intval($gasto["importe"]);
+        }
+            
+    }
+
+    foreach($gastos as $gasto){
+
+        if($gasto["tipo"] == "Otros" && isset($_POST['otros'])){
+            $pocenOtros=(intval($gasto["importe"])*100)/$acum;
+        }
+        if($gasto["tipo"] == "Regalos" && isset($_POST['regalos'])){
+            $pocenRegalos=(intval($gasto["importe"])*100)/$acum;
+        }
+        if($gasto["tipo"] == "Comida" && isset($_POST['comida'])){
+            $pocenComida=(intval($gasto["importe"])*100)/$acum;
+        }
+        if($gasto["tipo"] == "Casa" && isset($_POST['casa'])){
+            $pocenCasa=(intval($gasto["importe"])*100)/$acum;
+        }
+            
+    }
+    
+
+
+
+ if( isset($_POST['submit'])){
+	$count=0;
+	foreach($gastos as $gasto){
+
+		if($gasto["tipo"] == "Otros" && isset($_POST['otros'])){
+			$test[$count]["label"]=$gasto["tipo"];
+		
+			$test[$count]["y"]=$pocenOtros;
+			
+			$count=$count+1;
+
+		}
+		if($gasto["tipo"] == "Regalos" && isset($_POST['regalos'])){
+			$test[$count]["label"]=$gasto["tipo"];
+		
+			$test[$count]["y"]=$pocenRegalos;
+			$count=$count+1;
+
+		}
+		if($gasto["tipo"] == "Comida" && isset($_POST['comida'])){
+			$test[$count]["label"]=$gasto["tipo"];
+		
+			$test[$count]["y"]=$pocenComida;
+			$count=$count+1;
+
+		}
+		if($gasto["tipo"] == "Casa" && isset($_POST['casa'])){
+			$test[$count]["label"]=$gasto["tipo"];
+		
+			$test[$count]["y"]=$pocenCasa;
+			$count=$count+1;
+		
+		}
+
+	}
+
+}else{
+    echo "Holaaa2";
+    $count=0;
+
+	foreach($gastos as $gasto){
+
+	if($gasto["tipo"] != "Comida"){
+        $test[$count]["label"]=$gasto["tipo"];
+		
+		$test[$count]["y"]=$gasto["importe"];
+        $count=$count+1;
+    }
+
+	}
+}
  
- foreach($gastos as $gasto){
- 
-     $test[$count]["label"]=$gasto["tipo"];
-     
-     $test[$count]["y"]=$gasto["importe"];
- 
-     $count=$count+1;
- }
  
 ?>
 <!DOCTYPE HTML>
@@ -60,7 +152,42 @@ chart.render();
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div id="chartContainer" style="height: 370px; width: 50%;"></div>
+
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<div id="choose">
+    <?php 
+        if(!isset($_POST['fecha'])){
+            $time = strtotime("-1 year", time());
+            $date = date("Ymd", $time);
+            $_POST['fecha']=$date;
+        }
+        if(!isset($_POST['fecha2'])){
+            $_POST['fecha2']=date("Ymd");
+        }
+    ?>
+	<form action="personal_area.php" method="POST">
+
+	<label><input type="checkbox" name="otros" id="cbox1" <?php if (isset($_POST["otros"])) echo "checked='checked'"; ?>>Otros</label><br>
+	<label><input type="checkbox" name="regalos" id="cbox2" <?php if (isset($_POST["regalos"]))echo "checked='checked'"; ?>>Regalos</label><br>
+	<label><input type="checkbox" name="comida" id="cbox3"<?php if (isset($_POST["comida"])) echo "checked='checked'"; ?>>Comida</label><br>
+	<label><input type="checkbox" name="casa" id="cbox4" <?php if (isset($_POST["casa"])) echo "checked='checked'"; ?>>Casa</label><br>
+
+	<label class="labellog">Fecha Inicio:</label><br> 
+        <input class="inputfecha" type="date" name="fecha" 
+        value="<?php echo $_POST['fecha']; ?>">
+        <?= isset($errors["fecha"])?$errors["fecha"]:"" ?><br>
+		
+		<label class="labellog">Fecha Fin:</label><br> 
+        <input class="inputfecha" type="date" name="fecha2" 
+        value="<?php echo $_POST['fecha2']; ?>">
+        <?= isset($errors["fecha2"])?$errors["fecha2"]:"" ?><br>
+
+	<input class="inputbtn" type="submit" name="submit" value="Submit">
+
+	</form>
+</div>
+
 </body>
 </html>                              
