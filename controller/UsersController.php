@@ -63,17 +63,36 @@ class UsersController extends BaseController {
 	*
 	* @return void
 	*/
-	public function login() {
-		if (isset($_POST["username"])){ // reaching via HTTP Post...
-			//process login form
-			if ($this->userMapper->isValidUser($_POST["username"], 							 $_POST["passwd"])) {
+	public function login()
+	{
 
-				$_SESSION["currentuser"]=$_POST["username"];
+		if (isset($_POST["username"]) || (isset($_COOKIE["usr_SYM"], $_COOKIE["pass_SYM"]))) { // reaching via HTTP Post...
+
+			//	print_r($_POST);
+			$duracionCookie = time() + 60 * 60 * 24 * 30; //30 dias en segundos
+			$username = isset($_POST["username"], $_POST["passwd"]) ? $_POST["username"] : $_COOKIE["usr_SYM"];
+			$password = isset($_POST["username"], $_POST["passwd"]) ? $_POST["passwd"] : $_COOKIE["pass_SYM"];
+			$password = md5($password);
+
+			//process login form
+			if (
+				$this->userMapper->isValidUser($username, $password) or
+				(strtotime("now") >= strtotime($this->userMapper->readLastLogin($username) . "+1 month") and
+					isset($_COOKIE["usr_SYM"], $_COOKIE["pass_SYM"]))
+			) {
+
+				$_SESSION["currentuser"] = $username;
+				$this->userMapper->editLastLogin($username, date("Y-m-d", strtotime("now")));
+
+				if (isset($_POST["remember"]) and $_POST["remember"] == "on") {
+					setcookie("usr_SYM", $username, $duracionCookie);
+					//la contraseña debería encriptarse pero bueno
+					setcookie("pass_SYM", $password, $duracionCookie);
+				}
 
 				// send user to the restricted area (HTTP 302 code)
-				$this->view->redirect("posts", "index");
-
-			}else{
+				$this->view->redirect("gastos", "index");
+			} else {
 				$errors = array();
 				$errors["general"] = "Username is not valid";
 				$this->view->setVariable("errors", $errors);

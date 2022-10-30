@@ -3,11 +3,11 @@
 
 require_once './../../core/I18n.php';
 require_once './../../core/ViewManager.php';
-require_once("../../core/db_connection.php");
+require_once("../../core/PDOConnection.php");
 
 $view = ViewManager::getInstance();
 
-session_start();
+//session_start();
 
 if (isset($_POST["username"])){
   //process login form
@@ -55,19 +55,18 @@ if (isset($_POST["username"])){
 			</div>
 		</header> 
 	  
-		<p class="texto">SaveYourMoney es una aplicacón que te permitirá hacer un seguimiento de todos tus gastos,
-				¡Olvídate de acabar el mes a 0!</p>
-	  
-			
+		<p class="texto">SaveYourMoney is an application that allows you to follow your expenses,Stop ending your month with no money!</p>
+		<p><?= i18n("hello")?></p>
+	
 		<div class="container">
 
 			<form action="login.php" method="POST">
-				<label class="labellog">Usuario : </label>   
+				<label class="labellog"><?= i18n("User")?> : </label>   
 				<input class="inputlog" type="text" placeholder="Introduce tu usuario" name="username">
 				<label class="labellog">Contraseña : </label>  
 				<input class="inputlog" type="password" placeholder="Introduce tu contraseña" name="passwd">
 				<input class="inputlog" type="checkbox" placeholder="Recuerdame" checked="checked">
-				<a class="color">Recuerdame</a>
+				<a class="color">Remind me</a>
 
 				<button class="buttonlog" type="submit">Login </button>
 			</form>
@@ -81,7 +80,6 @@ if (isset($_POST["username"])){
 			<div>
 				<p>SaveYourMoney creado por Manuel Márquez, Mario López y Lander Lluvia. </p>
 			</div>
-
 
 			<?php
 				include(__DIR__."./../layout/language_select_element.php");

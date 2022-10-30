@@ -64,4 +64,18 @@ class UserMapper {
 			return true;
 		}
 	}
+
+	public function readLastLogin($username)
+	{
+		$stmt = $this->db->prepare("SELECT lastLoginDate FROM users where username=?");
+		$stmt->execute(array($username));
+
+		return $stmt->fetchColumn();
+	}
+	public function editLastLogin($username, $lastLoginDate)
+	{
+		$stmt = $this->db->prepare("UPDATE users SET lastLoginDate = ?  WHERE username = ?");
+		$stmt->execute(array($lastLoginDate, $username));
+	}
+
 }

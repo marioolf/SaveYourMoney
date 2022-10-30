@@ -1,7 +1,7 @@
 <?php
 //file: register.php
 
-require_once("../../core/db_connection.php");
+require_once("../../core/PDOConnection.php");
 session_start();
 
 $errors = array(); // validation errors
