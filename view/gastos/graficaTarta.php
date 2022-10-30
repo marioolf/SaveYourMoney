@@ -1,7 +1,8 @@
 <?php
  
- require_once("../../core/db_connection.php");
- //session_start();
+
+ require_once("../../core/PDOConnection.php");
+ $db=PDOConnection::getInstance();
  
  $currentuser = null;
  if (isset($_SESSION["currentuser"]) ){
@@ -107,7 +108,6 @@ if(!isset($_POST['fecha2'])){
 	}
 
 }else{
-    echo "Holaaa2";
     $count=0;
 
 	foreach($gastos as $gasto){
@@ -134,10 +134,10 @@ window.onload = function() {
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	title: {
-		text: "Usage Share of Desktop Browsers"
+		text: "Tipos de gasto durante los ultimos 12 meses"
 	},
 	subtitles: [{
-		text: "November 2017"
+		text: "Gastos"
 	}],
 	data: [{
 		type: "pie",
@@ -152,11 +152,9 @@ chart.render();
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 370px; width: 50%;"></div>
 
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<div id="choose" style="display:inline-block;width: 15%;float:left;">
 
-<div id="choose">
     <?php 
         if(!isset($_POST['fecha'])){
             $time = strtotime("-1 year", time());
@@ -168,25 +166,32 @@ chart.render();
         }
     ?>
 	<form action="personal_area.php" method="POST">
-
+    <div class="checkbox">
 	<label><input type="checkbox" name="otros" id="cbox1" <?php if (isset($_POST["otros"])) echo "checked='checked'"; ?>>Otros</label><br>
 	<label><input type="checkbox" name="regalos" id="cbox2" <?php if (isset($_POST["regalos"]))echo "checked='checked'"; ?>>Regalos</label><br>
 	<label><input type="checkbox" name="comida" id="cbox3"<?php if (isset($_POST["comida"])) echo "checked='checked'"; ?>>Comida</label><br>
 	<label><input type="checkbox" name="casa" id="cbox4" <?php if (isset($_POST["casa"])) echo "checked='checked'"; ?>>Casa</label><br>
-
-	<label class="labellog">Fecha Inicio:</label><br> 
+    </div>
+    <div class="fecha">
+	<label class="labellog" style="text-align: center;">Fecha Inicio:</label><br> 
         <input class="inputfecha" type="date" name="fecha" 
         value="<?php echo $_POST['fecha']; ?>">
         <?= isset($errors["fecha"])?$errors["fecha"]:"" ?><br>
 		
-		<label class="labellog">Fecha Fin:</label><br> 
+		<label class="labellog" style="text-align: center;">Fecha Fin:</label><br> 
         <input class="inputfecha" type="date" name="fecha2" 
         value="<?php echo $_POST['fecha2']; ?>">
         <?= isset($errors["fecha2"])?$errors["fecha2"]:"" ?><br>
-
-	<input class="inputbtn" type="submit" name="submit" value="Submit">
+    </div>
+        <input class="inputbtn" type="submit" name="submit" value="Submit">
 
 	</form>
+   
+</div>
+
+<div id="chartContainer" style="display:inline-block;height: 370px; width: 85%;float:left;">
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
 
 </body>

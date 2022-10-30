@@ -1,96 +1,93 @@
 <?php
-// file: model/User.php
 
-require_once(__DIR__."/../core/ValidationException.php");
+require_once(__DIR__ . "/../core/ValidationException.php");
 
-/**
-* Class User
-*
-* Represents a User in the blog
-*
-* @author lipido <lipido@gmail.com>
-*/
-class User {
 
-	/**
-	* The user name of the user
-	* @var string
-	*/
+class User
+{
+
 	private $username;
-
-	/**
-	* The password of the user
-	* @var string
-	*/
 	private $passwd;
+	private $passwdbis;
+	private $email;
+	private $lastLogging;
 
-	/**
-	* The constructor
-	*
-	* @param string $username The name of the user
-	* @param string $passwd The password of the user
-	*/
-	public function __construct($username=NULL, $passwd=NULL) {
+	public function __construct($username = NULL, $email = NULL, $passwd = NULL, $passwdbis = NULL, $lastLogging = NULL)
+	{
 		$this->username = $username;
 		$this->passwd = $passwd;
+		$this->passwdbis = $passwdbis;
+		$this->email = $email;
+		$this->lastLogging = $lastLogging;
 	}
-
-	/**
-	* Gets the username of this user
-	*
-	* @return string The username of this user
-	*/
-	public function getUsername() {
+	public function getUsername()
+	{
 		return $this->username;
 	}
 
-	/**
-	* Sets the username of this user
-	*
-	* @param string $username The username of this user
-	* @return void
-	*/
-	public function setUsername($username) {
+
+	public function setUsername($username)
+	{
 		$this->username = $username;
 	}
 
-	/**
-	* Gets the password of this user
-	*
-	* @return string The password of this user
-	*/
-	public function getPasswd() {
+	public function getPassword()
+	{
 		return $this->passwd;
 	}
-	/**
-	* Sets the password of this user
-	*
-	* @param string $passwd The password of this user
-	* @return void
-	*/
-	public function setPassword($passwd) {
+
+	public function setPassword($passwd)
+	{
 		$this->passwd = $passwd;
 	}
 
-	/**
-	* Checks if the current user instance is valid
-	* for being registered in the database
-	*
-	* @throws ValidationException if the instance is
-	* not valid
-	*
-	* @return void
-	*/
-	public function checkIsValidForRegister() {
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	public function setEmail($email)
+	{
+		$this->email = $email;
+	}
+
+
+	public function getLastLogging()
+	{
+		return $this->lastLogging;
+	}
+
+
+	public function setLastLogging($lastLogging)
+	{
+		$this->lastLogging = $lastLogging;
+	}
+
+	public function checkIsValidForRegister()
+	{
 		$errors = array();
 		if (strlen($this->username) < 5) {
 			$errors["username"] = "Username must be at least 5 characters length";
-
 		}
-		if (strlen($this->passwd) < 5) {
+		$username = $this->username;
+		if (str_contains($username, '<') || str_contains($username, '>') || str_contains($username, '\\')) {
+			$errors["username"] = "Username contains invalid characters";
+		}
+
+		$passwd = $this->passwd;
+		if (strlen($passwd) < 5) {
 			$errors["passwd"] = "Password must be at least 5 characters length";
 		}
-		if (sizeof($errors)>0){
+		if (str_contains($passwd, '<') || str_contains($passwd, '>') || str_contains($passwd, '\\')) {
+			$errors["passwd"] = "password contains invalid characters";
+		}
+
+		// Comprobaciones email TO-DO
+		if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+			$errors["email"] = "Not valid email";
+		}
+
+		if (sizeof($errors) > 0) {
 			throw new ValidationException($errors, "user is not valid");
 		}
 	}

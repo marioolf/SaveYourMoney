@@ -1,9 +1,17 @@
+
+<?php
+require_once(__DIR__ . "/../../core/ViewManager.php");
+$view = ViewManager::getInstance();
+$errors = $view->getVariable("errors");
+$user = $view->getVariable("user");
+$view->setVariable("title", "Register");
+?>
 <?php
 //file: register.php
 
-require_once("../../core/PDOConnection.php");
-session_start();
 
+
+/*
 $errors = array(); // validation errors
 $registerOK = false; // was the register ok?
 
@@ -52,6 +60,7 @@ if (isset($_POST["username"])){
     }
   }    
 }
+*/
 ?>
 
 
@@ -66,7 +75,6 @@ if (isset($_POST["username"])){
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>register</title>
@@ -74,36 +82,32 @@ if (isset($_POST["username"])){
 	</head>
 	<body class="bodyreg" data-lang="es">
 		<header>
-			<div>
-				<img class="imagenreg" src="../../images/oie_transparent2.png">
-			</div>
 		</header> 
 	  
 		<p class="textoreg">SaveYourMoney es una aplicacón que te permitirá hacer un seguimiento de todos tus gastos,
 				¡Olvídate de acabar el mes a 0!</p>
 
-      <?php if ($registerOK): ?>
-      <p>Bienvenido a la aplicación. Por favor <a href="login.php">logueate</a></p>
 
-      <?php else: 
-
-      ?> 
         <div class="container">
-              <form action="register.php" method="POST">
+              <form action="index.php?controller=users&amp;action=register" method="POST">
                   <label class="labelreg">Usuario : </label>   
-                  <input class="inputreg" type="text" name="username" 
-                  value="<?= isset($_POST["username"])?$_POST["username"]:"" ?>">
-          <?= isset($errors["username"])?$errors["username"]:"" ?><br>
+
+                  <input class="inputreg" type="text" name="username" value="<?= $user->getUsername() ?>" placeholder="<?= i18n("Username") ?>">
+			<?= isset($errors["username"]) ? i18n($errors["username"]) : "" ?><br>
+
+                  <label class="labelreg">Email : </label>   
+
+                              <input class="inputreg" type="text" name="email" value="" placeholder="<?= i18n("Email") ?>">
+                  <?= isset($errors["username"]) ? i18n($errors["username"]) : "" ?><br>
+
                   <label class="labelreg">Contraseña : </label>  
-                  <input class="inputreg" type="password" name="passwd" 
-                  value="<?= isset($_POST["passwd"])?$_POST["passwd"]:"" ?>">
-          <?= isset($errors["passwd"])?$errors["passwd"]:"" ?><br>
+                  <input class="inputreg" type="password" name="passwd" value="" placeholder="<?= i18n("Password") ?>">
+			<?= isset($errors["passwd"]) ? i18n($errors["passwd"]) : "" ?><br>
 
                   <button class="buttonreg" type="submit">Register </button>
               </form>
          </div>
 
-      <?php endif ?>
 
 
 		
@@ -116,3 +120,7 @@ if (isset($_POST["username"])){
 		</footer>
 	</body>
 </html>
+
+<?php $view->moveToFragment("css"); ?>
+<link rel="stylesheet" type="text/css" href="./css/style.css">
+<?php $view->moveToDefaultFragment(); ?>

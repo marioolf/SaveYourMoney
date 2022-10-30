@@ -28,11 +28,12 @@ class I18n {
 	*/
 	public function setLanguage($language) {
 		//include language file
-		include(__DIR__."/../view/messages/messages_$language.php");
+		include(__DIR__."./../view/messages/messages_$language.php");
 		$this->messages = $i18n_messages;
 
 		//save the language in session
 		$_SESSION[self::CURRENT_LANGUAGE_SESSION_VAR] = $language;
+		
 	}
 
 	/**

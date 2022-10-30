@@ -1,7 +1,9 @@
 <?php
 //file: añadir_gastos.php
 
-require_once("../../core/db_connection.php");
+require_once("../../core/PDOConnection.php");
+$db=PDOConnection::getInstance();
+
 session_start();
 
 //Comprobamos user
@@ -45,8 +47,8 @@ if (isset($_POST["submit"])){
   if ($validationOK) {
     try{
 
-      $stmt = $db->prepare("INSERT INTO gastos(nombre,importe,tipo,descr,author,fecha) values (?,?,?,?,?,?)");
-      $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"],$currentuser,$_POST["fecha"])); 
+      $stmt = $db->prepare("INSERT INTO gastos(nombre,importe,tipo,descr,author,fecha,archivo) values (?,?,?,?,?,?,?)");
+      $stmt->execute(array($_POST["nombre"], $_POST["importe"],$_POST["tipo"],$_POST["descr"],$currentuser,$_POST["fecha"],$_POST["archivo"])); 
       $gastoOK = true;
       
     }catch(PDOException $ex){
@@ -64,17 +66,16 @@ if (isset($_POST["submit"])){
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>anadir gasto</title>
 
 	</head>
   <body class="bodygastos" data-lang="es">
-    <?php include("../layout/header.php"); ?>
+    <?php include("./../layouts/header.php"); ?>
     <div class="container">
       <h1 class="texto">Crear gasto </h1>
       <?php if ($gastoOK): ?>
@@ -111,6 +112,11 @@ if (isset($_POST["submit"])){
           <input type="date" value="<?php echo date('Y-m-d'); ?>" name="fecha" 
           value="<?= isset($_POST["fecha"])?$_POST["fecha"]:"" ?>">
           <?= isset($errors["fecha"])?$errors["fecha"]:"" ?><br>
+
+          <label class="labellog">Archivo:</label><br>
+          <input class="inputgasto" type="file" name="archivo" 
+              value="<?= isset($_POST["archivo"])?$_POST["archivo"]:"" ?>">
+          <?= isset($errors["archivo"])?$errors["archivo"]:"" ?><br>
 
           <input class="inputbtn" type="submit" name="submit" value="Submit">
         </form>

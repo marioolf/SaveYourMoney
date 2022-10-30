@@ -8,7 +8,7 @@ session_destroy();
 // redirect the user to his personal_area
 // However, since the session was destroyed,
 // the user will be asked for login again
-header("Location: ../gastos/personal_area.php");
+header("Location: ./../gastos/personal_area.php");
 
 die();
 

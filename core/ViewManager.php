@@ -241,6 +241,9 @@ class ViewManager {
 	* @return void
 	*/
 	public function render($controller, $viewname) {
+		// echo "DEBUG EN LINEA 244 ViewManager:  ";
+		// echo $controller;
+		// echo $viewname;
 		include(__DIR__."/../view/$controller/$viewname.php");
 		$this->renderLayout();
 	}

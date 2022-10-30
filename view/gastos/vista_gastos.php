@@ -1,6 +1,7 @@
 <?php
 // file: ver_gastos.php
-require_once("../../core/db_connection.php");
+require_once("../../core/PDOConnection.php");
+$db=PDOConnection::getInstance();
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -40,17 +41,16 @@ try {
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+    <link rel="stylesheet" href="./../../css/style.css" type="text/css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>vista gasto</title>
 
 	</head>
   <body class="bodygastos" data-lang="es">
-    <?php include("../layout/header.php"); ?>
+    <?php include("./../layouts/header.php"); ?>
 
     <?php if ($gasto["author"] == $currentuser): ?>
       <div class="container">
@@ -68,9 +68,13 @@ try {
         <hr>
         <p class="textoleft">Fecha:</p>
         <p class="texto"><?= htmlentities($gasto["fecha"]) ?></p>  
+        <hr>
+        <p class="textoleft">Archivo:</p>
+        <p class="file"><?= htmlentities($gasto["archivo"]) ?></p> 
       </div>
 
 		<?php endif ?>
 
   </body>
 </html>
+

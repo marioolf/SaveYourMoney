@@ -1,46 +1,50 @@
 <?php
 // file: model/UserMapper.php
 
-require_once(__DIR__."/../core/PDOConnection.php");
+require_once(__DIR__ . "/../core/PDOConnection.php");
 
 /**
-* Class UserMapper
-*
-* Database interface for User entities
-*
-* @author lipido <lipido@gmail.com>
-*/
-class UserMapper {
+ * Class UserMapper
+ *
+ * Database interface for User entities
+ *
+ * @author lipido <lipido@gmail.com>
+ */
+class UserMapper
+{
 
 	/**
-	* Reference to the PDO connection
-	* @var PDO
-	*/
+	 * Reference to the PDO connection
+	 * @var PDO
+	 */
 	private $db;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->db = PDOConnection::getInstance();
 	}
 
 	/**
-	* Saves a User into the database
-	*
-	* @param User $user The user to be saved
-	* @throws PDOException if a database error occurs
-	* @return void
-	*/
-	public function save($user) {
-		$stmt = $this->db->prepare("INSERT INTO users values (?,?)");
-		$stmt->execute(array($user->getUsername(), $user->getPasswd()));
+	 * Saves a User into the database
+	 *
+	 * @param User $user The user to be saved
+	 * @throws PDOException if a database error occurs
+	 * @return void
+	 */
+	public function save($user)
+	{
+		$stmt = $this->db->prepare("INSERT INTO users(username,passwd,email) values (?,?,?)");
+		$stmt->execute(array($user->getUsername(), $user->getPassword(), $user->getEmail()));
 	}
 
 	/**
-	* Checks if a given username is already in the database
-	*
-	* @param string $username the username to check
-	* @return boolean true if the username exists, false otherwise
-	*/
-	public function usernameExists($username) {
+	 * Checks if a given username is already in the database
+	 *
+	 * @param string $username the username to check
+	 * @return boolean true if the username exists, false otherwise
+	 */
+	public function usernameExists($username)
+	{
 		$stmt = $this->db->prepare("SELECT count(username) FROM users where username=?");
 		$stmt->execute(array($username));
 
@@ -50,13 +54,14 @@ class UserMapper {
 	}
 
 	/**
-	* Checks if a given pair of username/password exists in the database
-	*
-	* @param string $username the username
-	* @param string $passwd the password
-	* @return boolean true the username/passwrod exists, false otherwise.
-	*/
-	public function isValidUser($username, $passwd) {
+	 * Checks if a given pair of username/password exists in the database
+	 *
+	 * @param string $username the username
+	 * @param string $passwd the password md5 hash
+	 * @return boolean true the username/passwrod exists, false otherwise.
+	 */
+	public function isValidUser($username, $passwd)
+	{
 		$stmt = $this->db->prepare("SELECT count(username) FROM users where username=? and passwd=?");
 		$stmt->execute(array($username, $passwd));
 
@@ -64,18 +69,23 @@ class UserMapper {
 			return true;
 		}
 	}
-
-	public function readLastLogin($username)
+	public function ultimaFecha($username)
 	{
-		$stmt = $this->db->prepare("SELECT lastLoginDate FROM users where username=?");
+		$stmt = $this->db->prepare("SELECT ultimaFecha FROM users where username=?");
 		$stmt->execute(array($username));
 
 		return $stmt->fetchColumn();
 	}
-	public function editLastLogin($username, $lastLoginDate)
+	public function modUltimaFecha($username, $ultimaFecha)
 	{
-		$stmt = $this->db->prepare("UPDATE users SET lastLoginDate = ?  WHERE username = ?");
-		$stmt->execute(array($lastLoginDate, $username));
+		$stmt = $this->db->prepare("UPDATE users SET ultimaFecha = ?  WHERE username = ?");
+		$stmt->execute(array($ultimaFecha, $username));
 	}
 
+
+	public function delete($username)
+	{
+		$stmt = $this->db->prepare("DELETE FROM users WHERE username=?");
+		$stmt->execute(array($username));
+	}
 }

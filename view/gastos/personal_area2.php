@@ -36,23 +36,23 @@ if ( !isset($_SESSION["currentuser"]) ){
 
 	</head>
 	<body class="bodypa" data-lang="es">
-		
+
 		<?php
 		include('./../layouts/header.php');
 		?>
 
-		
+		    
+
 			<p class="textopa">Aqui se muestra una grafica con tus ultimos 12 meses:</p>
 
 			<div id=graf>
 		
-			<?php include('grafica.php'); ?>
+			<?php include('graficaTarta.php'); ?>
 				
 			</div>
-		<button class = "cambiograf" onclick="location.href = './personal_area2.php';">Grafico de Tartas</button>
+            <button class = "cambiograf" onclick="location.href = './personal_area.php';">Grafico de Barras</button>
 			<p class="textopa">Hola <?= $_SESSION["currentuser"] ?>, estás en tu area personal de SaveYourMoney. Por Manu, Lander y Mario<br></p>
 	
-			
 	
 		</div>
         <p class="textopa"><a href="./../users/logout.php">Cerrar la sesión</a></p>

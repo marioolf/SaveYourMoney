@@ -1,34 +1,15 @@
+
 <?php
+
 //file: login.php
 
-require_once './../../core/I18n.php';
-require_once './../../core/ViewManager.php';
-require_once("../../core/PDOConnection.php");
+require_once (__DIR__.'./../../core/ViewManager.php');
+require_once (__DIR__.'./../../core/I18n.php');
 
 $view = ViewManager::getInstance();
+$view->setVariable("title", "Login");
+$errors = $view->getVariable("errors");
 
-//session_start();
-
-if (isset($_POST["username"])){
-  //process login form
-  try{    
-    $stmt = $db->prepare("SELECT count(username) FROM users where username=? and passwd=?");
-    $stmt->execute(array($_POST["username"], $_POST["passwd"]));
-
-    if ($stmt->fetchColumn() == 1) {
-      // username/password is valid, put the username in _SESSION
-      $_SESSION["currentuser"] = $_POST["username"];
-      
-      // send user to the restricted area (HTTP 302 code)
-      header("Location: ../gastos/personal_area.php");
-      die();
-    }else{
-      echo "Username is not valid<br>";
-    }
-  } catch(PDOException $ex) {
-    die("exception! ".$ex->getMessage());
-  }
-}
 ?>
 
 <html lang="es">
@@ -36,13 +17,11 @@ if (isset($_POST["username"])){
 		<meta charset="UTF-8"></meta>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
-		
+		<link rel="stylesheet" href="./../../css/style.css" type="text/css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>login</title>
@@ -50,29 +29,30 @@ if (isset($_POST["username"])){
 	</head>
 	<body class="bodylog" data-lang="es">
 		<header>
-			<div>
-				<img class="imagenlog" src="../../images/oie_transparent2.png">
-			</div>
+			
 		</header> 
 	  
 		<p class="texto">SaveYourMoney is an application that allows you to follow your expenses,Stop ending your month with no money!</p>
-		<p><?= i18n("hello")?></p>
 	
 		<div class="container">
 
-			<form action="login.php" method="POST">
-				<label class="labellog"><?= i18n("User")?> : </label>   
-				<input class="inputlog" type="text" placeholder="Introduce tu usuario" name="username">
-				<label class="labellog">Contraseña : </label>  
-				<input class="inputlog" type="password" placeholder="Introduce tu contraseña" name="passwd">
-				<input class="inputlog" type="checkbox" placeholder="Recuerdame" checked="checked">
-				<a class="color">Remind me</a>
+		<?= isset($errors["general"])?$errors["general"]:"" ?>
 
-				<button class="buttonlog" type="submit">Login </button>
-			</form>
+		<form method="post" action="index.php?controller=users&amp;action=login">
+		<div class="username">
+			<input class="inputlog" type="text" name="username" placeholder="<?= i18n("Username") ?>" required>
+		</div>
+		<div class="username">
+			<input class="inputlog" type="password" name="passwd" placeholder="<?= i18n("Password") ?>" required>
+		</div>
+		<!-- <div class="recordar">Recuperar contraseña</div> -->
 
-			<a href="#" class="fpass"> ¿Olvidaste tu contraseña? </a>  
-			<p class="texto"><a href="./register.php">Registrate!</a></p>
+		<input class="buttonlog" type="submit" value="<?= i18n("Log in") ?>">
+
+		<div class="registrarse">
+			<p class="texto"><?= i18n("Not user? ") ?><a href="index.php?controller=users&amp;action=register"><?= i18n("Register here!") ?></a></p>
+		</div>
+	</form>
 			
 		</div>
 		
@@ -82,9 +62,10 @@ if (isset($_POST["username"])){
 			</div>
 
 			<?php
-				include(__DIR__."./../layout/language_select_element.php");
+				include(__DIR__."./../layouts/language_select_element.php");
 			?>
 		
 		</footer>
 	</body>
+
 </html>

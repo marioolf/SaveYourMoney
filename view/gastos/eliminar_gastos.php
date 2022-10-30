@@ -2,7 +2,9 @@
 
 // file: eliminar_gastos.php
 
-require_once("../../core/db_connection.php");
+require_once("../../core/PDOConnection.php");
+$db=PDOConnection::getInstance();
+
 
 session_start();
 
@@ -12,7 +14,7 @@ if ( isset($_SESSION["currentuser"]) ){
   $currentuser = $_SESSION["currentuser"];
 } else {
   echo "Inicia sesion para acceder <br>";
-  echo "<a href='../users/login.php'>Logeate</a>";
+  echo "<a href='./users/login.php'>Logeate</a>";
   die();
 }
 
@@ -48,10 +50,9 @@ try {
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="../../css/style.css" media="screen">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxanium">
 		<title>eliminar gasto</title>

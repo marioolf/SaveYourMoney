@@ -1,9 +1,6 @@
 <?php
 //file: controller/PostController.php
 
-
-require_once(__DIR__."/../model/Post.php");
-require_once(__DIR__."/../model/PostMapper.php");
 require_once(__DIR__."/../model/User.php");
 
 require_once(__DIR__."/../core/ViewManager.php");
@@ -16,7 +13,7 @@ require_once(__DIR__."/../controller/BaseController.php");
 *
 * @author lipido <lipido@gmail.com>
 */
-class PostsController extends BaseController {
+class GastosController extends BaseController {
 
 	/**
 	* Reference to the PostMapper to interact
@@ -29,7 +26,6 @@ class PostsController extends BaseController {
 	public function __construct() {
 		parent::__construct();
 
-		$this->postMapper = new PostMapper();
 	}
 
 	/**
@@ -45,14 +41,9 @@ class PostsController extends BaseController {
 	*/
 	public function index() {
 
-		// obtain the data from the database
-		$posts = $this->postMapper->findAll();
-
-		// put the array containing Post object to the view
-		$this->view->setVariable("posts", $posts);
-
+		
 		// render the view (/view/posts/index.php)
-		$this->view->render("posts", "index");
+		$this->view->render("gastos", "personal_area_redirect");
 	}
 
 	/**
@@ -96,11 +87,7 @@ class PostsController extends BaseController {
 		// put the Post object to the view
 		$this->view->setVariable("post", $post);
 
-		// check if comment is already on the view (for example as flash variable)
-		// if not, put an empty Comment for the view
-		$comment = $this->view->getVariable("comment");
-		$this->view->setVariable("comment", ($comment==NULL)?new Comment():$comment);
-
+		
 		// render the view (/view/posts/view.php)
 		$this->view->render("posts", "view");
 
